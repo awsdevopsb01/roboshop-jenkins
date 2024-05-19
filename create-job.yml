@@ -1,5 +1,6 @@
 - name: Create a jenkins jobs
-  hosts: all
+  hosts: localhost
+  connection: local
   tasks:
     - name: Create a jenkins jobs ansible
       community.general.jenkins_job:
