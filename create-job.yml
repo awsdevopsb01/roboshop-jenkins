@@ -4,7 +4,7 @@
   tasks:
     - name: Create a jenkins jobs ansible
       community.general.jenkins_job:
-        config: "{{ lookup('file', 'test.xml') }}"
+        config: "{{ lookup('file', 'sjob.xml') }}"
         name: create new jenkins job
         password: admin123
         url: http://172.31.47.254:8080
