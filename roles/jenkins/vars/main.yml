@@ -2,3 +2,6 @@ sjobs:
   - { git_repo_url: https://github.com/awsdevopsb01/tf-roboshop-vpc.git, job_name: roboshop-terraform}
   - { git_repo_url: https://github.com/awsdevopsb01/roboshop-ansible.git, job_name: roboshop-ansible-job}
   - { git_repo_url: https://github.com/awsdevopsb01/aws_ssm_parameters.git, job_name: aws_ssm_param_job}
+
+mjobs:
+  - { git_repo_url: https://github.com/awsdevopsb01/cart.git, job_name: cart}
