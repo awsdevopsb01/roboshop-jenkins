@@ -7,6 +7,10 @@
   register: jenkins_job_status
   ignore_errors: true
 
+- name: Debug
+  debug:
+    msg: "{{jenkins_job_status}}"
+
 - name: Copy xml file
   ansible.builtin.template:
     src: sjob.xml
