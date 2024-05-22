@@ -12,9 +12,9 @@ def call() {
         }
 
         stages {
-            stage('code quality') {
+            stage('Code Quality') {
                 steps {
-                    sh 'echo Code Quality'
+                    sh ' sonar-scanner -Dsonar.projectKey=${component} -Dsonar.host.url=http://172.31.43.16:9000'
                 }
             }
         }
