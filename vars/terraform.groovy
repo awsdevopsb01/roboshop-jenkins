@@ -5,9 +5,11 @@ def call() {
                 label 'workstation'
             }
         }
-
+        options {
+            ansiColor('xterm')
+        }
         parameters {
-            choice(name: 'env', choices ['dev','prod'], description: 'Pick your choice of Environment')
+            choice(name: 'env', choices: ['dev','prod'], description: 'Pick your choice of Environment')
         }
 
         stages {
