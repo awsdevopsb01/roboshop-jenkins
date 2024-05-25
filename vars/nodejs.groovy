@@ -35,7 +35,19 @@ def call() {
                     sh 'echo SCA Scan'
                 }
             }
+            stage('Release') {
+                when {
+                    expression {
+                        env.TAG_NAME==~".*"
+                    }
+                }
+                steps {
+                    sh 'echo Release'
+                }
+            }
         }
+
+
 
         post {
             always {
