@@ -42,7 +42,7 @@ def call() {
                     }
                 }
                 steps {
-                    sh 'echo Release'
+                    sh 'curl -v -u admin:admin123 --upload-file server.js http://172.31.34.184:8081/repository/cart/server.js'
                 }
             }
         }
