@@ -17,7 +17,12 @@
         <numToKeep>-1</numToKeep>
         <abortBuilds>false</abortBuilds>
     </orphanedItemStrategy>
-    <triggers/>
+    <triggers>
+        <com.igalg.jenkins.plugins.mswt.trigger.ComputedFolderWebHookTrigger plugin="multibranch-scan-webhook-trigger@1.0.11">
+            <spec></spec>
+            <token>{{ item.job_name }}</token>
+        </com.igalg.jenkins.plugins.mswt.trigger.ComputedFolderWebHookTrigger>
+    </triggers>
     <disabled>false</disabled>
     <sources class="jenkins.branch.MultiBranchProject$BranchSourceList" plugin="branch-api@2.1144.v1425d1c3d5a_7">
         <data>
@@ -34,6 +39,21 @@
                 <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
                     <properties class="empty-list"/>
                 </strategy>
+                <buildStrategies>
+                    <jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl plugin="basic-branch-build-strategies@81.v05e333931c7d">
+                        <filters>
+                            <jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl_-ExactNameFilter>
+                                <name>main</name>
+                                <caseSensitive>false</caseSensitive>
+                            </jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl_-ExactNameFilter>
+                        </filters>
+                    </jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl>
+                    <jenkins.branch.buildstrategies.basic.BranchBuildStrategyImpl plugin="basic-branch-build-strategies@81.v05e333931c7d"/>
+                    <jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl plugin="basic-branch-build-strategies@81.v05e333931c7d">
+                        <atLeastMillis>-1</atLeastMillis>
+                        <atMostMillis>604800000</atMostMillis>
+                    </jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl>
+                </buildStrategies>
             </jenkins.branch.BranchSource>
         </data>
         <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
