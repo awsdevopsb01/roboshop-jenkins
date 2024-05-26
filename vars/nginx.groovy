@@ -16,23 +16,23 @@ def call() {
                 steps {
                     sh 'echo Code Quality'
 //                    sh ' sonar-scanner -Dsonar.projectKey=${component} -Dsonar.host.url=http://172.31.37.59:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.qualitygate.wait=true'
-                }
+                    }
             }
-
             stage('Unit Test Cases') {
                 steps {
-                    sh 'python3.6 -m unittest'
+                    sh 'echo Unit Testcases'
+//                    sh 'npm test'
                 }
             }
             stage('Checkmarx SAST Scan') {
                 steps {
-                    sh 'echo Unit Test Cases'
+                    sh 'echo SAST Scan'
                 }
             }
 
             stage('Checkmarx SCA Scan') {
                 steps {
-                    sh 'echo Unit Test Cases'
+                    sh 'echo SCA Scan'
                 }
             }
             stage('Release') {
@@ -42,12 +42,17 @@ def call() {
                     }
                 }
                 steps {
+                    sh 'npm install'
                     sh 'echo $TAG_NAME >VERSION'
-                    sh 'zip -r ${component}-${TAG_NAME}.zip *.ini *.py *.txt VERSION'
+                    sh 'zip -r ${component}-${TAG_NAME}.zip *'
+                    //delete the Jenkinsfile
+                    sh 'zip -d ${component}-${TAG_NAME}.zip Jenkinsfile'
                     sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.34.184:8081/repository/${component}/${component}-${TAG_NAME}.zip'
                 }
             }
         }
+
+
 
         post {
             always {

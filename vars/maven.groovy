@@ -41,6 +41,19 @@ def call() {
                     sh 'echo Unit Test Cases'
                 }
             }
+            stage('Release') {
+                when {
+                    expression {
+                        env.TAG_NAME==~".*"
+                    }
+                }
+                steps {
+                    sh 'mvn package ; cp target/${component}-1.0.jar ${component}.jar'
+                    sh 'echo $TAG_NAME >VERSION'
+                    sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar'
+                    sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.34.184:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+                }
+            }
         }
 
         post {
